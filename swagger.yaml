@@ -1,0 +1,658 @@
+openapi: 3.0.0
+info:
+  title: Mil Parabrisas API
+  version: 1.0.0
+  description: API para gestión de taller mecánico
+
+tags:
+  - name: Clientes
+    description: Operaciones sobre clientes
+  - name: Vehiculos
+    description: Operaciones sobre vehículos
+  - name: Servicios
+    description: Operaciones sobre servicios
+  - name: Mecanicos
+    description: Operaciones sobre mecánicos
+  - name: Ordenes
+    description: Operaciones sobre órdenes de servicio
+  - name: Facturacion
+    description: Operaciones sobre facturación
+  - name: Repuestos
+    description: Operaciones sobre repuestos
+  - name: Proveedores
+    description: Operaciones sobre proveedores
+
+paths:
+  /clientes:
+    post:
+      tags: [Clientes]
+      summary: Crea un cliente
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                id:
+                  type: integer
+                nombre:
+                  type: string
+                apellido:
+                  type: string
+                telefono:
+                  type: string
+                correo:
+                  type: string
+                direccion:
+                  type: string
+      responses:
+        201:
+          description: Cliente creado
+    get:
+      tags: [Clientes]
+      summary: Lista todos los clientes
+      responses:
+        200:
+          description: Lista de clientes
+    put:
+      tags: [Clientes]
+      summary: Actualiza un cliente
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                id:
+                  type: integer
+                nombre:
+                  type: string
+                apellido:
+                  type: string
+                telefono:
+                  type: string
+                correo:
+                  type: string
+                direccion:
+                  type: string
+      responses:
+        200:
+          description: Cliente actualizado
+
+  /clientes/{id}:
+    get:
+      tags: [Clientes]
+      summary: Lee un cliente
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+      responses:
+        200:
+          description: Cliente leído
+    delete:
+      tags: [Clientes]
+      summary: Elimina un cliente
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+      responses:
+        200:
+          description: Cliente eliminado
+
+  /vehiculos:
+    get:
+      tags: [Vehiculos]
+      summary: Lista todos los vehiculos
+      responses:
+        200:
+          description: Lista de vehiculos
+    post:
+      tags: [Vehiculos]
+      summary: Crea un vehículo
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                id:
+                  type: integer
+                id_cliente:
+                  type: integer
+                marca:
+                  type: string
+                modelo:
+                  type: string
+                placa:
+                  type: string
+      responses:
+        201:
+          description: Vehículo creado
+    put:
+      tags: [Vehiculos]
+      summary: Actualiza un vehículo
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                id:
+                  type: integer
+                marca:
+                  type: string
+                modelo:
+                  type: string
+                placa:
+                  type: string
+      responses:
+        200:
+          description: Vehículo actualizado
+
+  /vehiculos/{id}:
+    get:
+      tags: [Vehiculos]
+      summary: Lee un vehículo
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+      responses:
+        200:
+          description: Vehículo leído
+    delete:
+      tags: [Vehiculos]
+      summary: Elimina un vehículo
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+      responses:
+        200:
+          description: Vehículo eliminado
+
+  /servicios:
+    get:
+      tags: [Servicios]
+      summary: Lista todos los servicios
+      responses:
+        200:
+          description: Lista de servicios
+    post:
+      tags: [Servicios]
+      summary: Crea un servicio
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                id:
+                  type: integer
+                nombre_servicio:
+                  type: string
+                descripcion:
+                  type: string
+                costo:
+                  type: number
+      responses:
+        201:
+          description: Servicio creado
+    put:
+      tags: [Servicios]
+      summary: Actualiza un servicio
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                id:
+                  type: integer
+                nombre_servicio:
+                  type: string
+                descripcion:
+                  type: string
+                costo:
+                  type: number
+      responses:
+        200:
+          description: Servicio actualizado
+
+  /servicios/{id}:
+    get:
+      tags: [Servicios]
+      summary: Lee un servicio
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+      responses:
+        200:
+          description: Servicio leído
+    delete:
+      tags: [Servicios]
+      summary: Elimina un servicio
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+      responses:
+        200:
+          description: Servicio eliminado
+
+  /mecanicos:
+    get:
+      tags: [Mecanicos]
+      summary: Lista todos los mecanicos
+      responses:
+        200:
+          description: Lista de mecanicos
+    post:
+      tags: [Mecanicos]
+      summary: Crea un mecánico
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                id:
+                  type: integer
+                nombre:
+                  type: string
+                apellido:
+                  type: string
+                especialidad:
+                  type: string
+                telefono:
+                  type: string
+      responses:
+        201:
+          description: Mecánico creado
+    put:
+      tags: [Mecanicos]
+      summary: Actualiza un mecánico
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                id:
+                  type: integer
+                nombre:
+                  type: string
+                apellido:
+                  type: string
+                especialidad:
+                  type: string
+                telefono:
+                  type: string
+      responses:
+        200:
+          description: Mecánico actualizado
+
+  /mecanicos/{id}:
+    get:
+      tags: [Mecanicos]
+      summary: Lee un mecánico
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+      responses:
+        200:
+          description: Mecánico leído
+    delete:
+      tags: [Mecanicos]
+      summary: Elimina un mecánico
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+      responses:
+        200:
+          description: Mecánico eliminado
+
+  /ordenes:
+    get:
+      tags: [Ordenes]
+      summary: Lista todos los ordenes
+      responses:
+        200:
+          description: Lista de ordenes
+    post:
+      tags: [Ordenes]
+      summary: Crea una orden de servicio
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                id:
+                  type: integer
+                id_vehiculo:
+                  type: integer
+                id_servicio:
+                  type: integer
+                id_mecanico:
+                  type: integer
+                fecha_ingreso:
+                  type: string
+                  format: date
+                fecha_salida:
+                  type: string
+                  format: date
+                estado:
+                  type: string
+      responses:
+        201:
+          description: Orden creada
+
+    put:
+      tags: [Ordenes]
+      summary: Actualiza el estado de una orden
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                id:
+                  type: integer
+                estado:
+                  type: string
+      responses:
+        200:
+          description: Orden actualizada
+
+  /ordenes/{id}:
+    get:
+      tags: [Ordenes]
+      summary: Lee una orden
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+      responses:
+        200:
+          description: Orden leída
+
+    delete:
+      tags: [Ordenes]
+      summary: Elimina una orden
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+      responses:
+        200:
+          description: Orden eliminada
+
+  /facturacion:
+    get:
+      tags: [Facturacion]
+      summary: Lista todas las facturas
+      responses:
+        200:
+          description: Lista de facturas
+    post:
+      tags: [Facturacion]
+      summary: Crea una factura
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                id:
+                  type: integer
+                id_orden:
+                  type: integer
+                id_vehiculo:
+                  type: integer
+                id_repuesto:
+                  type: integer
+                subtotal:
+                  type: number
+                total:
+                  type: number
+      responses:
+        201:
+          description: Factura creada
+
+    put:
+      tags: [Facturacion]
+      summary: Actualiza el total de una factura
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                id:
+                  type: integer
+                total:
+                  type: number
+      responses:
+        200:
+          description: Factura actualizada
+
+  /facturacion/{id}:
+    get:
+      tags: [Facturacion]
+      summary: Lee una factura
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+      responses:
+        200:
+          description: Factura leída
+
+    delete:
+      tags: [Facturacion]
+      summary: Elimina una factura
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+      responses:
+        200:
+          description: Factura eliminada
+
+  /repuestos:
+    get:
+      tags: [Repuestos]
+      summary: Lista todos los repuestos
+      responses:
+        200:
+          description: Lista de repuestos
+    post:
+      tags: [Repuestos]
+      summary: Crea un repuesto
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                id:
+                  type: integer
+                nombre:
+                  type: string
+                descripcion:
+                  type: string
+                precio_unidad:
+                  type: number
+                cantidad_disponible:
+                  type: integer
+      responses:
+        201:
+          description: Repuesto creado
+
+    put:
+      tags: [Repuestos]
+      summary: Actualiza un repuesto
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                id:
+                  type: integer
+                precio_unidad:
+                  type: number
+                cantidad_disponible:
+                  type: integer
+      responses:
+        200:
+          description: Repuesto actualizado
+
+  /repuestos/{id}:
+    get:
+      tags: [Repuestos]
+      summary: Lee un repuesto
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+      responses:
+        200:
+          description: Repuesto leído
+
+    delete:
+      tags: [Repuestos]
+      summary: Elimina un repuesto
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+      responses:
+        200:
+          description: Repuesto eliminado
+
+  /proveedores:
+    get:
+      tags: [Proveedores]
+      summary: Lista todos los proveedores
+      responses:
+        200:
+          description: Lista de proveedores
+    post:
+      tags: [Proveedores]
+      summary: Crea un proveedor
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                id:
+                  type: integer
+                id_repuesto:
+                  type: integer
+                empresa:
+                  type: string
+                correo:
+                  type: string
+                telefono:
+                  type: string
+      responses:
+        201:
+          description: Proveedor creado
+
+    put:
+      tags: [Proveedores]
+      summary: Actualiza un proveedor
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                id:
+                  type: integer
+                correo:
+                  type: string
+                telefono:
+                  type: string
+      responses:
+        200:
+          description: Proveedor actualizado
+
+  /proveedores/{id}:
+    get:
+      tags: [Proveedores]
+      summary: Lee un proveedor
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+      responses:
+        200:
+          description: Proveedor leído
+
+    delete:
+      tags: [Proveedores]
+      summary: Elimina un proveedor
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+      responses:
+        200:
+          description: Proveedor eliminado
